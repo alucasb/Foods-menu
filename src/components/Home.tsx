@@ -1,22 +1,29 @@
+
 import { useEffect } from 'react'
 
-const API_KEY =  import.meta.env.VITE_API_KEY
-const API_ID =  import.meta.env.VITE_API_ID
-
-const url = `https://api.edamam.com/api/food-database/v2/parser?app_id=${API_ID}&app_key=${API_KEY}&nutrition-type=cooking`
-
-const foods = async(url: string)=>{
-    const res = await fetch(url)
-    const data = await res.json()
-    console.log(data)
-}
+const url = import.meta.env.API_url
 
 function Home() {
+    const recepies = async(url: string)=>{
+        const res = await fetch(url)
+        const data = await res.json()
+        console.log(data);
+        return data
+    }
+    
     useEffect(()=>{
-    foods(url)
-    })
+        recepies(url)
+    },[])
     return (
-        <div>Home</div>
+    
+        <div>
+            <h1>Home</h1>
+        <p>
+        
+        </p>
+        
+        </div>
+        
     )
 }
 
