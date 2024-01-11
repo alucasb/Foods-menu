@@ -1,3 +1,3 @@
-# Foods Menu 
+# League of Legends Randomizer
 
 - Nothing for now 
