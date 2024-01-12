@@ -1,26 +1,49 @@
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-const url = import.meta.env.API_url
+
 
 function Home() {
-    const recepies = async(url: string)=>{
-        const res = await fetch(url)
-        const data = await res.json()
-        console.log(data);
-        return data
-    }
+
+    const [champion, setChampion] = useState([])
     
     useEffect(()=>{
-        recepies(url)
+        const url = import.meta.env.VITE_JSON_URL
+        const fetchData = async ()=>{
+            try{
+                const res = await fetch(url)
+                const data = await res.json()
+                setChampion(data.data)
+            }catch (err){
+                console.log(err)
+            }
+        }
+        fetchData()
     },[])
+
+    const randomizer = ()=>{
+        const name = Object.keys(champion)
+        const randomName = Math.floor(Math.random() * name.length)
+        console.log(randomName, name[randomName])
+    }
+
     return (
     
         <div>
             <h1>Home</h1>
-        <p>
+        <button onClick={randomizer}>Gerar build</button>
+        {/* tem os nomes já mapeados e no state */}
+        {/* {champion && (
+            <div className='champsName'>
+                {Object.keys(champion).map((names)=>(
+                    <p key={names}>{champion[names].name}</p>
+                ))}
+            </div>
+        )} */}
         
-        </p>
+        <div>
+            build lado a lado de itens
+        </div>
         
         </div>
         
